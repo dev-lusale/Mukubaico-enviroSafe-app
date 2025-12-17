@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:esri="clr-namespace:Esri.ArcGISRuntime.Maui;assembly=Esri.ArcGISRuntime.Maui"
+             x:Class="MukubaicoTSFDashboard.Pages.SimpleArcGISMapPage"
+             Title="ArcGIS Map (Working)"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                BackgroundColor="#1A237E" 
+                Padding="15,10"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0"
+                       Text="🗺️ ArcGIS TSF Monitoring Map" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="White"
+                       VerticalOptions="Center"/>
+                
+                <Border Grid.Column="1" 
+                        BackgroundColor="#4CAF50" 
+                        StrokeShape="RoundRectangle 15" 
+                        Padding="10,5">
+                    <Label Text="WORKING" 
+                           FontSize="12" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Map Container -->
+        <Grid Grid.Row="1">
+            <!-- Simple, Clean MapView -->
+            <esri:MapView Grid.Row="0" 
+                          x:Name="MainMapView"
+                          BackgroundColor="#E3F2FD" />
+
+            <!-- Status Panel -->
+            <Border HorizontalOptions="Start" 
+                    VerticalOptions="Start" 
+                    Margin="15"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 8"
+                    Padding="12"
+                    StrokeThickness="1"
+                    Stroke="#E0E0E0">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="📍 Map Status" 
+                           FontSize="12" 
+                           FontAttributes="Bold" 
+                           TextColor="#333"/>
+                    
+                    <Label x:Name="StatusLabel" 
+                           Text="Initializing..." 
+                           FontSize="11" 
+                           TextColor="#666"/>
+                    
+                    <Label x:Name="CoordinatesLabel" 
+                           Text="Coordinates: Loading..." 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Loading Indicator -->
+            <Border x:Name="LoadingFrame"
+                    BackgroundColor="#80000000"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="30"
+                    StrokeThickness="0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsVisible="True">
+                <VerticalStackLayout Spacing="15">
+                    <ActivityIndicator x:Name="LoadingIndicator"
+                                     IsRunning="True" 
+                                     Color="White" 
+                                     WidthRequest="40" 
+                                     HeightRequest="40"/>
+                    <Label Text="Loading ArcGIS Map..." 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name="LoadingStatusLabel"
+                           Text="Initializing map components..." 
+                           FontSize="12" 
+                           TextColor="#E0E0E0"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Action Buttons -->
+        <Border Grid.Row="2" 
+                BackgroundColor="White" 
+                Padding="15"
+                StrokeThickness="0">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="RefreshButton" 
+                        Text="🔄 Refresh" 
+                        BackgroundColor="#2196F3" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"
+                        Clicked="OnRefreshClicked"/>
+                
+                <Button x:Name="ZoomToZambiaButton" 
+                        Text="🎯 Zambia" 
+                        BackgroundColor="#4CAF50" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"
+                        Clicked="OnZoomToZambiaClicked"/>
+                
+                <Button x:Name="ShowTSFButton" 
+                        Text="🏭 TSF Data" 
+                        BackgroundColor="#FF9800" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"
+                        Clicked="OnShowTSFClicked"/>
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+
+</ContentPage>

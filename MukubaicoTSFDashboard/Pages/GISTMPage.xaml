@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MukubaicoTSFDashboard.Pages.GISTMPage"
+             Title="GISTM Compliance"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Frame BackgroundColor="#1A237E" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="GISTM" FontSize="28" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="Global Industry Standard on Tailings Management" FontSize="13" TextColor="#B3E5FC"/>
+                    <Label Text="ICMM/UNEP/PRI - 2020" FontSize="12" TextColor="#90CAF9"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="20" HasShadow="True">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="GISTM Compliance" FontSize="16" TextColor="#666"/>
+                        <Label Text="96%" FontSize="42" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </VerticalStackLayout>
+                    <Frame Grid.Column="1" BackgroundColor="#4CAF50" CornerRadius="40" Padding="20" WidthRequest="80" HeightRequest="80" HasShadow="False">
+                        <Label Text="✓" FontSize="40" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+
+            <Label Text="Risk Governance" FontSize="18" FontAttributes="Bold" TextColor="#1A237E"/>
+            
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="✅ Board Oversight Active" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    <Label Text="Last Board Review: December 15, 2025" FontSize="12" TextColor="#666"/>
+                    <Label Text="Risk Register: Updated" FontSize="12" TextColor="#666"/>
+                    <Label Text="Accountability Framework: Established" FontSize="12" TextColor="#666"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Monitoring Systems" FontSize="18" FontAttributes="Bold" TextColor="#1A237E"/>
+            
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="IoT Sensors Online: 97%" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    <ProgressBar Progress="0.97" ProgressColor="#4CAF50"/>
+                    <Label Text="Total Sensors: 35" FontSize="12" TextColor="#666"/>
+                    <Label Text="Active: 34 | Maintenance: 1" FontSize="12" TextColor="#666"/>
+                    <Label Text="🗺️ QGIS 3D Integration: Active" FontSize="13" TextColor="#1976D2"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Emergency Readiness" FontSize="18" FontAttributes="Bold" TextColor="#1A237E"/>
+            
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="✅ Monthly Drills Conducted" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    <Label Text="Last Drill: December 10, 2025" FontSize="12" TextColor="#666"/>
+                    <Label Text="Participation: 100%" FontSize="12" TextColor="#666"/>
+                    <Label Text="Emergency Response Plan: Current" FontSize="12" TextColor="#666"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,20">
+                <Button Text="📊 View Reports" BackgroundColor="#1976D2" TextColor="White" CornerRadius="8"/>
+                <Button Grid.Column="1" Text="🔄 Refresh Data" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

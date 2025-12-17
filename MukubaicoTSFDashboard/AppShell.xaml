@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MukubaicoTSFDashboard.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MukubaicoTSFDashboard"
+    xmlns:pages="clr-namespace:MukubaicoTSFDashboard.Pages"
+    Title="Mukubaico TSF Dashboard"
+    FlyoutBackgroundColor="#1A237E">
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#283593" Padding="20" HeightRequest="150">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                <Label Text="MUKUBAICO" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+                <Label Text="ENVIRO-SAFE" FontSize="18" FontAttributes="Bold" TextColor="#64B5F6"/>
+                <Label Text="TSF Safety Dashboard" FontSize="12" TextColor="#B3E5FC"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Dashboard" Icon="home.png">
+        <ShellContent
+            Title="Main Dashboard"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Interactive Mapping" Icon="map.png">
+        <ShellContent
+            Title="ArcGIS Map (Operational)"
+            ContentTemplate="{DataTemplate pages:SimpleArcGISMapPage}"
+            Route="SimpleArcGISMapPage" />
+        <ShellContent
+            Title="QGIS 3D Maps (Functional)"
+            ContentTemplate="{DataTemplate pages:QGISMapPage}"
+            Route="QGISMapPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Compliance Standards" Icon="clipboard.png">
+        <ShellContent
+            Title="ZEMA"
+            ContentTemplate="{DataTemplate pages:ZEMAPage}"
+            Route="ZEMAPage" />
+        <ShellContent
+            Title="EIA"
+            ContentTemplate="{DataTemplate pages:EIAPage}"
+            Route="EIAPage" />
+        <ShellContent
+            Title="GISTM"
+            ContentTemplate="{DataTemplate pages:GISTMPage}"
+            Route="GISTMPage" />
+        <ShellContent
+            Title="ICOLD"
+            ContentTemplate="{DataTemplate pages:ICOLDPage}"
+            Route="ICOLDPage" />
+        <ShellContent
+            Title="IFC EHS"
+            ContentTemplate="{DataTemplate pages:IFCPage}"
+            Route="IFCPage" />
+        <ShellContent
+            Title="ISO"
+            ContentTemplate="{DataTemplate pages:ISOPage}"
+            Route="ISOPage" />
+        <ShellContent
+            Title="Mine Safety (ZM)"
+            ContentTemplate="{DataTemplate pages:MineSafetyPage}"
+            Route="MineSafetyPage" />
+    </FlyoutItem>
+
+    <MenuItem Text="Logout" Clicked="OnLogoutClicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource Glyph="🚪" FontFamily="Arial" Color="White"/>
+        </MenuItem.IconImageSource>
+    </MenuItem>
+
+</Shell>

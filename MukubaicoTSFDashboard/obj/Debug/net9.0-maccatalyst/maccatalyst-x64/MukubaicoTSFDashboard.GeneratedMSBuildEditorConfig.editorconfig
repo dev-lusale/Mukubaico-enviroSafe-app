@@ -1,0 +1,115 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0-maccatalyst
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MukubaicoTSFDashboard
+build_property.ProjectDir = c:\Users\Dell\Desktop\Dashboard\MukubaicoTSFDashboard\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/EIAPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.EIAPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\EIAPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\EIAPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/GISTMPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.GISTMPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\GISTMPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\GISTMPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/ICOLDPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.ICOLDPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\ICOLDPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\ICOLDPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/IFCPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.IFCPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\IFCPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\IFCPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/ISOPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.ISOPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\ISOPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\ISOPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\LoginPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/MineSafetyPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.MineSafetyPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\MineSafetyPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\MineSafetyPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/QGISMapPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.QGISMapPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\QGISMapPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\QGISMapPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/SimpleArcGISMapPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.SimpleArcGISMapPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\SimpleArcGISMapPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\SimpleArcGISMapPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Pages/ZEMAPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Pages.ZEMAPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\ZEMAPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\ZEMAPage.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[c:/Users/Dell/Desktop/Dashboard/MukubaicoTSFDashboard/Views/ComplianceDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MukubaicoTSFDashboard.Views.ComplianceDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ComplianceDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ComplianceDetailPage.xaml

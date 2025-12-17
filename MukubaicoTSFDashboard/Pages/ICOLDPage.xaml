@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MukubaicoTSFDashboard.Pages.ICOLDPage"
+             Title="ICOLD Compliance"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Frame BackgroundColor="#1A237E" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="ICOLD" FontSize="28" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="International Commission on Large Dams" FontSize="13" TextColor="#B3E5FC"/>
+                    <Label Text="Tailings Dam Safety Bulletins" FontSize="12" TextColor="#90CAF9"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="20" HasShadow="True">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Structural Compliance" FontSize="16" TextColor="#666"/>
+                        <Label Text="98%" FontSize="42" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </VerticalStackLayout>
+                    <Frame Grid.Column="1" BackgroundColor="#4CAF50" CornerRadius="40" Padding="20" WidthRequest="80" HeightRequest="80" HasShadow="False">
+                        <Label Text="✓" FontSize="40" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+
+            <Label Text="Structural Integrity Monitoring" FontSize="18" FontAttributes="Bold" TextColor="#1A237E"/>
+            
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Inclinometer Readings" FontSize="16" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Deformation:" FontSize="14" TextColor="#666"/>
+                        <Label Grid.Column="1" Text="2.1 mm" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="Status: ✅ Stable - No significant movement" FontSize="13" TextColor="#4CAF50"/>
+                    <ProgressBar Progress="0.21" ProgressColor="#4CAF50"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Seepage Control" FontSize="16" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Flow Rate:" FontSize="14" TextColor="#666"/>
+                        <Label Grid.Column="1" Text="0.5 L/s" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="Status: ✅ Normal - Within acceptable range" FontSize="13" TextColor="#4CAF50"/>
+                    <ProgressBar Progress="0.5" ProgressColor="#4CAF50"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Pore Pressure Monitoring" FontSize="16" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Pressure:" FontSize="14" TextColor="#666"/>
+                        <Label Grid.Column="1" Text="52 kPa" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="Status: ✅ Normal - Dam core stable" FontSize="13" TextColor="#4CAF50"/>
+                    <ProgressBar Progress="0.52" ProgressColor="#4CAF50"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="#E3F2FD" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="🗺️ QGIS Monitoring Layers Active" FontSize="14" FontAttributes="Bold" TextColor="#1976D2"/>
+                    <Label Text="Inclinometer: INCL-01 ✅" FontSize="12" TextColor="#666"/>
+                    <Label Text="Seepage Meter: SEEP-01 ✅" FontSize="12" TextColor="#666"/>
+                    <Label Text="Pressure Sensor: PRES-01 ✅" FontSize="12" TextColor="#666"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,20">
+                <Button Text="📊 View Reports" BackgroundColor="#1976D2" TextColor="White" CornerRadius="8"/>
+                <Button Grid.Column="1" Text="🔄 Refresh Data" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,936 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MukubaicoTSFDashboard.ViewModels"
+             xmlns:esri="clr-namespace:Esri.ArcGISRuntime.Maui;assembly=Esri.ArcGISRuntime.Maui"
+             x:Class="MukubaicoTSFDashboard.MainPage"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.BindingContext>
+        <vm:DashboardViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <!-- HEADER -->
+            <Frame BackgroundColor="#1A237E" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="MUKUBAICO ENVIRO-SAFE" 
+                           FontSize="28" 
+                           FontAttributes="Bold" 
+                           TextColor="White" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="TSF Safety &amp; Compliance Dashboard" 
+                           FontSize="18" 
+                           TextColor="#B3E5FC" 
+                           HorizontalTextAlignment="Center"/>
+                    
+                    <!-- Standards Badges -->
+                    <FlexLayout Wrap="Wrap" 
+                                JustifyContent="Center" 
+                                AlignItems="Center" 
+                                Margin="10,10,0,0">
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="ZEMA" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="EIA" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="GISTM" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="ICOLD" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="IFC" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="ISO" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="#2196F3" Padding="8,4" CornerRadius="5" Margin="3" HasShadow="False">
+                            <Label Text="MINE SAFETY (ZM)" TextColor="White" FontSize="11" FontAttributes="Bold"/>
+                        </Frame>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- MAIN CONTENT GRID -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15" RowSpacing="15">
+                
+                <!-- LEFT PANEL - GIS MAP -->
+                <Frame Grid.Column="0" BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="GIS Spatial Compliance Map" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Text="Environmental Management Act (ZEMA) | EIA Regulations | IFC EHS" 
+                               FontSize="10" 
+                               TextColor="#666" 
+                               Margin="0,0,0,10"/>
+                        
+                        <!-- Real Interactive Map -->
+                        <Frame BackgroundColor="#E3F2FD" CornerRadius="8" Padding="2" HeightRequest="300" HasShadow="False">
+                            <Grid>
+                                <!-- ArcGIS MapView -->
+                                <esri:MapView x:Name="DashboardMapView" 
+                                              BackgroundColor="#E8F5E8" />
+
+                                <!-- Map Controls Overlay -->
+                                <StackLayout Orientation="Vertical" 
+                                             HorizontalOptions="End" 
+                                             VerticalOptions="Start" 
+                                             Margin="8"
+                                             Spacing="3">
+                                    
+                                    <Button x:Name="ZoomInButton"
+                                            Text="+"
+                                            BackgroundColor="White"
+                                            TextColor="#333"
+                                            BorderColor="#CCC"
+                                            BorderWidth="1"
+                                            CornerRadius="3"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Padding="0"
+                                            Clicked="OnDashboardZoomInClicked"/>
+                                    
+                                    <Button x:Name="ZoomOutButton"
+                                            Text="−"
+                                            BackgroundColor="White"
+                                            TextColor="#333"
+                                            BorderColor="#CCC"
+                                            BorderWidth="1"
+                                            CornerRadius="3"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Padding="0"
+                                            Clicked="OnDashboardZoomOutClicked"/>
+                                    
+                                    <Button x:Name="CenterButton"
+                                            Text="📍"
+                                            BackgroundColor="White"
+                                            TextColor="#333"
+                                            BorderColor="#CCC"
+                                            BorderWidth="1"
+                                            CornerRadius="3"
+                                            FontSize="12"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Padding="0"
+                                            Clicked="OnDashboardCenterClicked"/>
+                                </StackLayout>
+
+                                <!-- Map Legend -->
+                                <Border HorizontalOptions="Start" 
+                                        VerticalOptions="End" 
+                                        Margin="8"
+                                        BackgroundColor="White"
+                                        StrokeShape="RoundRectangle 4"
+                                        Padding="8"
+                                        StrokeThickness="1"
+                                        Stroke="#E0E0E0"
+                                        Opacity="0.95">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="🗺️ Legend" 
+                                               FontSize="10" 
+                                               FontAttributes="Bold" 
+                                               TextColor="#333"/>
+                                        
+                                        <Grid ColumnDefinitions="15,*" ColumnSpacing="4">
+                                            <Ellipse Grid.Column="0" 
+                                                     Fill="#FF5722" 
+                                                     WidthRequest="8" 
+                                                     HeightRequest="8"/>
+                                            <Label Grid.Column="1" 
+                                                   Text="High Risk TSF" 
+                                                   FontSize="8" 
+                                                   TextColor="#666"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        
+                                        <Grid ColumnDefinitions="15,*" ColumnSpacing="4">
+                                            <Ellipse Grid.Column="0" 
+                                                     Fill="#FF9800" 
+                                                     WidthRequest="8" 
+                                                     HeightRequest="8"/>
+                                            <Label Grid.Column="1" 
+                                                   Text="Medium Risk TSF" 
+                                                   FontSize="8" 
+                                                   TextColor="#666"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        
+                                        <Grid ColumnDefinitions="15,*" ColumnSpacing="4">
+                                            <Ellipse Grid.Column="0" 
+                                                     Fill="#4CAF50" 
+                                                     WidthRequest="8" 
+                                                     HeightRequest="8"/>
+                                            <Label Grid.Column="1" 
+                                                   Text="Low Risk TSF" 
+                                                   FontSize="8" 
+                                                   TextColor="#666"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                        
+                                        <Grid ColumnDefinitions="15,*" ColumnSpacing="4">
+                                            <Ellipse Grid.Column="0" 
+                                                     Fill="#2196F3" 
+                                                     WidthRequest="8" 
+                                                     HeightRequest="8"/>
+                                            <Label Grid.Column="1" 
+                                                   Text="Monitoring Station" 
+                                                   FontSize="8" 
+                                                   TextColor="#666"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <!-- Loading Indicator -->
+                                <Border x:Name="DashboardLoadingFrame"
+                                        BackgroundColor="#80000000"
+                                        StrokeShape="RoundRectangle 6"
+                                        Padding="15"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        IsVisible="True">
+                                    <VerticalStackLayout Spacing="8">
+                                        <ActivityIndicator x:Name="DashboardLoadingIndicator"
+                                                         IsRunning="True" 
+                                                         Color="White" 
+                                                         WidthRequest="25" 
+                                                         HeightRequest="25"/>
+                                        <Label Text="Loading Map..." 
+                                               FontSize="12" 
+                                               FontAttributes="Bold" 
+                                               TextColor="White"
+                                               HorizontalTextAlignment="Center"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </Frame>
+                        
+                        <Grid ColumnDefinitions="Auto,*" Margin="0,5,0,0">
+                            <Frame BackgroundColor="#4CAF50" 
+                                   CornerRadius="8" 
+                                   Padding="0" 
+                                   WidthRequest="16" 
+                                   HeightRequest="16" 
+                                   HasShadow="False">
+                                <Label Text="✓" 
+                                       FontSize="10" 
+                                       TextColor="White" 
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Grid.Column="1" 
+                                   Text="All spatial buffers compliant" 
+                                   FontSize="12" 
+                                   TextColor="#4CAF50" 
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   Margin="8,0,0,0"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- RIGHT PANEL - LIVE RISK STATUS -->
+                <Frame Grid.Column="1" BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Live Risk Status" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Text="GISTM Lifecycle | ICOLD Monitoring | ZEMA Thresholds" 
+                               FontSize="10" 
+                               TextColor="#666" 
+                               Margin="0,0,0,10"/>
+                        
+                        <Frame BackgroundColor="{Binding RiskScoreColor}" 
+                               CornerRadius="10" 
+                               Padding="20" 
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding CurrentData.FacilityId}" 
+                                       FontSize="16" 
+                                       TextColor="White" 
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding CurrentData.RiskScore, StringFormat='Risk Score: {0:F0}'}" 
+                                       FontSize="32" 
+                                       TextColor="White" 
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding CurrentData.AlertLevel, StringFormat='Alert Level: {0}'}" 
+                                       FontSize="18" 
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                        
+                        <Label Text="{Binding CurrentData.LastUpdate, StringFormat='Last Update: {0:HH:mm:ss}'}" 
+                               FontSize="11" 
+                               TextColor="#666"
+                               HorizontalTextAlignment="Center"
+                               Margin="0,10,0,0"/>
+                        
+                        <Button Text="↻ Refresh Data" 
+                                Command="{Binding RefreshCommand}"
+                                BackgroundColor="#1976D2"
+                                TextColor="White"
+                                CornerRadius="8"
+                                Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+
+            <!-- COMPLIANCE PANELS -->
+            <Label Text="Compliance Status by Standard" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   TextColor="#1A237E"
+                   Margin="0,10,0,0"/>
+
+            <!-- ZEMA Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="ZEMA - Environmental Management Act" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.ZEMA.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="Environmental Management Act, No. 12 of 2011" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Water Quality Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- Groundwater Monitoring Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        
+                        <!-- Buffer Zones Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- EIA Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="EIA - Environmental Impact Assessment" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.EIA.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="EIA Regulations, S.I. No. 28 of 1997" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Mitigation Measures Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- Buffer Conditions Status (Warning) -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#FF9800" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="!" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                        <!-- Rehabilitation Plans Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- GISTM Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="GISTM - Global Industry Standard" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.GISTM.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="GISTM 2020 - ICMM/UNEP/PRI Tailings Management" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Risk Governance Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                        <!-- Monitoring Systems Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- Emergency Readiness Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ICOLD Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="ICOLD - Structural Safety" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.ICOLD.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="ICOLD Tailings Dam Safety Bulletins" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Structural Integrity Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        
+                        <!-- Seepage Control Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        
+                        <!-- Deformation Monitoring Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- IFC EHS Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="IFC EHS - Environmental Health &amp; Safety" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.IFC.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="IFC EHS Guidelines for Mining" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Discharge Quality Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                        
+                        <!-- Dust Suppression Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                       
+                        <!-- Waste Handling Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ISO Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="ISO - International Standards" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.ISO.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="ISO 14001, ISO 45001, ISO 31000" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- ISO 14001 Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- ISO 45001 Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        
+                        <!-- ISO 31000 Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Mine Safety - Zambia Panel -->
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Mine Safety - Zambia" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#1A237E"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding CurrentData.Compliance.MineSafety.CompliancePercentage, StringFormat='{0:F0}%'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#4CAF50"/>
+                    </Grid>
+                    <Label Text="Mines and Minerals Development Act, No. 11 of 2015 | MSD Regulations" 
+                           FontSize="10" 
+                           TextColor="#666"/>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5"/>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                        <!-- Restricted Zones Status -->
+                        <Frame Grid.Row="0" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- Emergency Systems Status -->
+                        <Frame Grid.Row="1" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- Safety Training Status -->
+                        <Frame Grid.Row="2" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        
+                        <!-- Incident Reporting Status -->
+                        <Frame Grid.Row="3" 
+                               BackgroundColor="#4CAF50" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               WidthRequest="20" 
+                               HeightRequest="20" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SUMMARY COMPLIANCE RADAR -->
+            <Label Text="Overall Compliance Summary" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   TextColor="#1A237E"
+                   Margin="0,20,0,0"/>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Compliance Radar Chart" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           TextColor="#1A237E"
+                           HorizontalTextAlignment="Center"/>
+                    
+                    <!-- Radar Chart Visual Representation -->
+                    <Frame BackgroundColor="#F5F5F5" CornerRadius="8" Padding="20" HeightRequest="250" HasShadow="False">
+                        <Grid>
+                            <VerticalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="ZEMA" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.ZEMA.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.ZEMA.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="EIA" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.EIA.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.EIA.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="GISTM" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.GISTM.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.GISTM.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="ICOLD" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.ICOLD.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.ICOLD.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="IFC EHS" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.IFC.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.IFC.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="ISO" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.ISO.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.ISO.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="Mine Safety (ZM)" FontSize="14" FontAttributes="Bold"/>
+                                    <ProgressBar Grid.Column="1" Progress="{Binding CurrentData.Compliance.MineSafety.CompliancePercentage, Converter={StaticResource PercentToDecimalConverter}}" ProgressColor="#4CAF50" WidthRequest="200"/>
+                                    <Label Grid.Column="1" Text="{Binding CurrentData.Compliance.MineSafety.CompliancePercentage, StringFormat='{0:F0}%'}" FontSize="12" HorizontalOptions="End" Margin="210,0,0,0"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                    
+                    <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center">
+                        <Frame BackgroundColor="#4CAF50" 
+                               CornerRadius="8" 
+                               Padding="0" 
+                               WidthRequest="18" 
+                               HeightRequest="18" 
+                               HasShadow="False">
+                            <Label Text="✓" 
+                                   FontSize="11" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        <Label Grid.Column="1" 
+                               Text="All standards above 90% compliance threshold" 
+                               FontSize="13" 
+                               TextColor="#4CAF50" 
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               Margin="8,0,0,0"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Footer -->
+            <Frame BackgroundColor="#1A237E" CornerRadius="10" Padding="15" HasShadow="True" Margin="0,10,0,20">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Real-time monitoring powered by QGIS 3D mapping and spatial analysis" 
+                           FontSize="11" 
+                           TextColor="#B3E5FC"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Dashboard auto-refreshes every 5 seconds" 
+                           FontSize="10" 
+                           TextColor="#90CAF9"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:esri="clr-namespace:Esri.ArcGISRuntime.Maui;assembly=Esri.ArcGISRuntime.Maui"
+             xmlns:toolkit="clr-namespace:Esri.ArcGISRuntime.Toolkit.Maui;assembly=Esri.ArcGISRuntime.Toolkit.Maui"
+             x:Class="MukubaicoTSFDashboard.Pages.QGISMapPage"
+             Title="QGIS 3D Mapping"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header with QGIS 3D Analysis Title and Status -->
+        <Border Grid.Row="0" 
+                BackgroundColor="#1A237E" 
+                Padding="15,10"
+                StrokeThickness="0">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                <Label Grid.Column="0"
+                       Text="🌍 QGIS TSF Monitoring • Leaflet • OpenStreetMap" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="White"
+                       VerticalOptions="Center"/>
+                
+                <Border Grid.Column="1" 
+                        BackgroundColor="#4CAF50" 
+                        StrokeShape="RoundRectangle 15" 
+                        Padding="10,5"
+                        Margin="0,0,10,0">
+                    <Label Text="LIVE" 
+                           FontSize="12" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                </Border>
+                
+                <Button Grid.Column="2"
+                        Text="🍃 Leaflet"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        CornerRadius="15"
+                        FontSize="12"
+                        Padding="15,8"
+                        Clicked="OnLeafletModeClicked"/>
+                
+                <Button Grid.Column="3"
+                        Text="QGIS"
+                        BackgroundColor="#7B1FA2"
+                        TextColor="White"
+                        CornerRadius="15"
+                        FontSize="12"
+                        Padding="15,8"/>
+            </Grid>
+        </Border>
+
+        <!-- Main QGIS Map Container with Live Interactive Map -->
+        <Grid Grid.Row="1" RowDefinitions="Auto,*">
+            
+            <!-- QGIS Server Status Panel with Leaflet Integration -->
+            <Border Grid.Row="0" 
+                    BackgroundColor="White" 
+                    Padding="10"
+                    StrokeThickness="0">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="15">
+                    <Border Grid.Column="0" 
+                            BackgroundColor="#4CAF50" 
+                            StrokeShape="RoundRectangle 20" 
+                            Padding="0" 
+                            WidthRequest="40" 
+                            HeightRequest="40">
+                        <Label Text="🍃" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="QGIS TSF Monitoring System • Leaflet Engine" FontSize="14" FontAttributes="Bold" TextColor="#1A237E"/>
+                        <Label x:Name="ConnectionStatusLabel" Text="Leaflet + OpenStreetMap • QGIS Server: localhost:8080 • TSF-MUKUBAICO-001" FontSize="11" TextColor="#666"/>
+                    </VerticalStackLayout>
+                    <Border Grid.Column="2" 
+                            BackgroundColor="#E8F5E8" 
+                            StrokeShape="RoundRectangle 15" 
+                            Padding="8,4">
+                        <Label Text="OSM" FontSize="10" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </Border>
+                    <Border Grid.Column="3" 
+                            BackgroundColor="#E8F5E8" 
+                            StrokeShape="RoundRectangle 15" 
+                            Padding="8,4">
+                        <Label Text="LIVE" FontSize="10" FontAttributes="Bold" TextColor="#4CAF50"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Live Interactive QGIS Map with ArcGIS-style Navigation -->
+            <Border Grid.Row="1" 
+                    BackgroundColor="White" 
+                    StrokeThickness="1"
+                    Stroke="#E0E0E0">
+                <Grid>
+                    <!-- Interactive Map View -->
+                    <esri:MapView x:Name="QGISMapView" 
+                                  BackgroundColor="#E8F5E8"
+                                  Margin="0" />
+
+                    <!-- ArcGIS-style Navigation Controls (Right Side) -->
+                    <StackLayout Orientation="Vertical" 
+                                 HorizontalOptions="End" 
+                                 VerticalOptions="Start" 
+                                 Margin="15"
+                                 Spacing="5">
+                        
+                        <!-- Zoom In Button -->
+                        <Button x:Name="ZoomInButton"
+                                Text="+"
+                                BackgroundColor="White"
+                                TextColor="#333"
+                                BorderColor="#CCC"
+                                BorderWidth="1"
+                                CornerRadius="5"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                Clicked="OnZoomInClicked"/>
+                        
+                        <!-- Zoom Out Button -->
+                        <Button x:Name="ZoomOutButton"
+                                Text="−"
+                                BackgroundColor="White"
+                                TextColor="#333"
+                                BorderColor="#CCC"
+                                BorderWidth="1"
+                                CornerRadius="5"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                Clicked="OnZoomOutClicked"/>
+                        
+                        <!-- 3D View Button -->
+                        <Button x:Name="View3DButton"
+                                Text="🏔️"
+                                BackgroundColor="White"
+                                TextColor="#333"
+                                BorderColor="#CCC"
+                                BorderWidth="1"
+                                CornerRadius="5"
+                                FontSize="16"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                Clicked="OnView3DClicked"/>
+                        
+                        <!-- My Location Button -->
+                        <Button x:Name="LocationButton"
+                                Text="📍"
+                                BackgroundColor="White"
+                                TextColor="#333"
+                                BorderColor="#CCC"
+                                BorderWidth="1"
+                                CornerRadius="5"
+                                FontSize="16"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                Clicked="OnLocationClicked"/>
+                        
+                        <!-- Layers Button -->
+                        <Button x:Name="LayersButton"
+                                Text="🗂️"
+                                BackgroundColor="White"
+                                TextColor="#333"
+                                BorderColor="#CCC"
+                                BorderWidth="1"
+                                CornerRadius="5"
+                                FontSize="16"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                Clicked="OnLayersClicked"/>
+                    </StackLayout>
+
+                    <!-- Leaflet + QGIS Layer Controls (Top Left) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start" 
+                            Margin="15"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 8"
+                            Padding="10"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="🍃 Leaflet + QGIS Layers" 
+                                   FontSize="12" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#333"/>
+                            
+                            <Button x:Name="OpenStreetMapButton" 
+                                    Text="🗺️ OpenStreetMap" 
+                                    BackgroundColor="#2E7D32" 
+                                    TextColor="White" 
+                                    CornerRadius="5"
+                                    FontSize="11"
+                                    Padding="8,5"
+                                    Clicked="OnOpenStreetMapClicked"/>
+                            
+                            <Button x:Name="TopographyButton" 
+                                    Text="🏔️ Topography" 
+                                    BackgroundColor="#7B1FA2" 
+                                    TextColor="White" 
+                                    CornerRadius="5"
+                                    FontSize="11"
+                                    Padding="8,5"
+                                    Clicked="OnTopographyClicked"/>
+                            
+                            <Button x:Name="MonitoringButton" 
+                                    Text="📍 TSF Monitoring" 
+                                    BackgroundColor="#4CAF50" 
+                                    TextColor="White" 
+                                    CornerRadius="5"
+                                    FontSize="11"
+                                    Padding="8,5"
+                                    Clicked="OnMonitoringClicked"/>
+                            
+                            <Button x:Name="WaterBodiesButton" 
+                                    Text="💧 Water Bodies" 
+                                    BackgroundColor="#2196F3" 
+                                    TextColor="White" 
+                                    CornerRadius="5"
+                                    FontSize="11"
+                                    Padding="8,5"
+                                    Clicked="OnWaterBodiesClicked"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Real-time Analysis Panel (Bottom Left) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="End" 
+                            Margin="15"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 8"
+                            Padding="12"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="📊 QGIS TSF Live Analysis" 
+                                   FontSize="12" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#333"/>
+                            
+                            <HorizontalStackLayout Spacing="8">
+                                <Ellipse Fill="#4CAF50" 
+                                         WidthRequest="12" 
+                                         HeightRequest="12"/>
+                                <Label x:Name="AnalysisStatusLabel" 
+                                       Text="Real-time processing active" 
+                                       FontSize="10" 
+                                       TextColor="#666"
+                                       VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            
+                            <Label x:Name="VolumeDisplayLabel" 
+                                   Text="Volume: 2.75M m³" 
+                                   FontSize="10" 
+                                   TextColor="#666"/>
+                            
+                            <Label x:Name="StabilityDisplayLabel" 
+                                   Text="Stability: FS 1.45" 
+                                   FontSize="10" 
+                                   TextColor="#666"/>
+                            
+                            <Label x:Name="RiskDisplayLabel" 
+                                   Text="Risk Level: LOW" 
+                                   FontSize="10" 
+                                   TextColor="#4CAF50"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- OpenStreetMap Attribution (Bottom Right) -->
+                    <Border HorizontalOptions="End" 
+                            VerticalOptions="End" 
+                            Margin="15"
+                            BackgroundColor="#80FFFFFF"
+                            StrokeShape="RoundRectangle 5"
+                            Padding="8"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="© OpenStreetMap contributors" 
+                                   FontSize="9" 
+                                   TextColor="#333"
+                                   HorizontalTextAlignment="End"/>
+                            <Label Text="Powered by Leaflet • QGIS Server" 
+                                   FontSize="8" 
+                                   TextColor="#666"
+                                   HorizontalTextAlignment="End"/>
+                            <Label Text="TSF Monitoring System" 
+                                   FontSize="8" 
+                                   FontAttributes="Bold"
+                                   TextColor="#2E7D32"
+                                   HorizontalTextAlignment="End"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Loading Indicator for QGIS -->
+                    <Border x:Name="QGISLoadingFrame"
+                            BackgroundColor="#80000000"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="30"
+                            StrokeThickness="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            IsVisible="False">
+                        <VerticalStackLayout Spacing="15">
+                            <ActivityIndicator x:Name="LoadingIndicator"
+                                             IsRunning="True" 
+                                             Color="White" 
+                                             WidthRequest="40" 
+                                             HeightRequest="40"/>
+                            <Label Text="Loading QGIS 3D Map..." 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+                            <Label x:Name="StatusLabel"
+                                   Text="Initializing QGIS Server connection..." 
+                                   FontSize="12" 
+                                   TextColor="#E0E0E0"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- 3D Analysis Info Panel (Initially Hidden) -->
+                    <Border x:Name="AnalysisInfoPanel"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="20"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="End"
+                            Margin="20"
+                            IsVisible="False">
+                        <VerticalStackLayout Spacing="10">
+                            <Label x:Name="AnalysisTitleLabel" 
+                                   Text="3D Spatial Analysis Results" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#1A237E"/>
+                            
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="Volume" FontSize="12" TextColor="#666"/>
+                                    <Label x:Name="VolumeValueLabel" Text="2.75M m³" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                    <Label Text="Stability" FontSize="12" TextColor="#666"/>
+                                    <Label x:Name="SlopeStabilityValueLabel" Text="FS: 1.45" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                            
+                            <Button x:Name="CloseAnalysisButton" 
+                                    Text="✕ Close" 
+                                    BackgroundColor="#E0E0E0" 
+                                    TextColor="Black" 
+                                    CornerRadius="8"
+                                    FontSize="12"
+                                    Clicked="OnCloseAnalysisClicked"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Action Buttons Panel for Leaflet + QGIS -->
+        <Border Grid.Row="2" 
+                BackgroundColor="White" 
+                Padding="15"
+                StrokeThickness="0">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="RefreshButton" 
+                        Text="🔄 Refresh" 
+                        BackgroundColor="#2196F3" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"/>
+                
+                <Button x:Name="LeafletControlsButton" 
+                        Text="🍃 Leaflet" 
+                        BackgroundColor="#2E7D32" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"
+                        Clicked="OnLeafletControlsClicked"/>
+                
+                <Button x:Name="CaptureButton" 
+                        Text="📷 Capture" 
+                        BackgroundColor="#FF9800" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"/>
+                
+                <Button x:Name="AnalyzeButton" 
+                        Text="📊 TSF Analysis" 
+                        BackgroundColor="#4CAF50" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"/>
+                
+                <Button x:Name="Generate3DReportButton" 
+                        Text="📋 Report" 
+                        BackgroundColor="#7B1FA2" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"/>
+                
+                <Button x:Name="TestAuthButton" 
+                        Text="🔐 Auth Test" 
+                        BackgroundColor="#9C27B0" 
+                        TextColor="White" 
+                        CornerRadius="8"
+                        FontSize="12"
+                        Padding="20,10"
+                        Clicked="OnTestAuthClicked"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- Hidden Analysis Results Panel (Expandable) -->
+        <Border x:Name="AnalysisResultsPanel"
+                Grid.Row="1"
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 15"
+                Padding="20"
+                Margin="20"
+                StrokeThickness="1"
+                Stroke="#E0E0E0"
+                VerticalOptions="End"
+                IsVisible="False">
+            <ScrollView MaximumHeightRequest="300">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="📈 Detailed Analysis Results" FontSize="16" FontAttributes="Bold" TextColor="#1A237E"/>
+                    
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="15" RowSpacing="10">
+                        
+                        <!-- Volume Calculations -->
+                        <Border Grid.Row="0" Grid.Column="0" BackgroundColor="#FFF3C4" StrokeShape="RoundRectangle 8" Padding="12">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="📏 Total Volume" FontSize="12" FontAttributes="Bold" TextColor="#E65100"/>
+                                <Label x:Name="DetailedVolumeLabel" Text="2.75M m³" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                <Label x:Name="VolumeChangeLabel" Text="+0.2% from last week" FontSize="10" TextColor="#666"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Stability Analysis -->
+                        <Border Grid.Row="0" Grid.Column="1" BackgroundColor="#E8F5E8" StrokeShape="RoundRectangle 8" Padding="12">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="⚖️ Slope Stability" FontSize="12" FontAttributes="Bold" TextColor="#2E7D32"/>
+                                <Label x:Name="DetailedStabilityLabel" Text="FS: 1.45" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="Factor of Safety" FontSize="10" TextColor="#666"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Settlement Rate -->
+                        <Border Grid.Row="1" Grid.Column="0" BackgroundColor="#E3F2FD" StrokeShape="RoundRectangle 8" Padding="12">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="📉 Settlement" FontSize="12" FontAttributes="Bold" TextColor="#1976D2"/>
+                                <Label x:Name="SettlementValueLabel" Text="3.2 mm/yr" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                <Label x:Name="SettlementStatusLabel" Text="Within limits" FontSize="10" TextColor="#666"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Seepage Rate -->
+                        <Border Grid.Row="1" Grid.Column="1" BackgroundColor="#FFF8E1" StrokeShape="RoundRectangle 8" Padding="12">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="💧 Seepage Rate" FontSize="12" FontAttributes="Bold" TextColor="#F57F17"/>
+                                <Label x:Name="SeepageValueLabel" Text="8.5 L/min" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                <Label x:Name="SeepageStatusLabel" Text="Normal range" FontSize="10" TextColor="#666"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Risk Assessment -->
+                        <Border Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="#E8F5E8" StrokeShape="RoundRectangle 8" Padding="15">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="🛡️ Overall Risk Assessment" FontSize="14" FontAttributes="Bold" TextColor="#2E7D32"/>
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label x:Name="RiskLevelLabel" Grid.Column="0" Text="Current Risk Level: LOW" FontSize="12" TextColor="Black"/>
+                                    <Border x:Name="RiskStatusFrame" Grid.Column="1" BackgroundColor="#4CAF50" StrokeShape="RoundRectangle 10" Padding="6,2">
+                                        <Label x:Name="RiskStatusLabel" Text="SAFE" FontSize="10" FontAttributes="Bold" TextColor="White"/>
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Layer Management -->
+                    <Label Text="🗂️ Active QGIS Layers" FontSize="14" FontAttributes="Bold" TextColor="#1A237E"/>
+                    
+                    <!-- Topography Layer -->
+                    <Border BackgroundColor="#F3E5F5" StrokeShape="RoundRectangle 8" Padding="15">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0" IsChecked="True" Color="#7B1FA2"/>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="TSF Topography" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+                                <Label x:Name="LastUpdateLabel" Text="Raster • Last updated: 2 min ago" FontSize="11" TextColor="#666"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="🏔️" FontSize="20"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Monitoring Points Layer -->
+                    <Border BackgroundColor="#E8F5E8" StrokeShape="RoundRectangle 8" Padding="15">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0" IsChecked="True" Color="#4CAF50"/>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Monitoring Points" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="Vector • 35 active sensors" FontSize="11" TextColor="#666"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="📍" FontSize="20"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Water Bodies Layer -->
+                    <Border BackgroundColor="#E1F5FE" StrokeShape="RoundRectangle 8" Padding="15">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <CheckBox Grid.Column="0" IsChecked="True" Color="#2196F3"/>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Water Bodies" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="Polygon • Real-time levels" FontSize="11" TextColor="#666"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="💧" FontSize="20"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Export Options -->
+                    <Label Text="📤 Export Options" FontSize="14" FontAttributes="Bold" TextColor="#1A237E"/>
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                        <Button x:Name="ExportMapDataButton" 
+                                Grid.Column="0" 
+                                Text="💾 Export Data" 
+                                BackgroundColor="#FF5722" 
+                                TextColor="White" 
+                                CornerRadius="8"
+                                Padding="15"/>
+                        <Button x:Name="ToggleAnalysisButton" 
+                                Grid.Column="1" 
+                                Text="📊 Hide Analysis" 
+                                BackgroundColor="#666" 
+                                TextColor="White" 
+                                CornerRadius="8"
+                                Padding="15"
+                                Clicked="OnToggleAnalysisClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+    </Grid>
+
+</ContentPage>

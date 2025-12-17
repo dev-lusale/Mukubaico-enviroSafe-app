@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MukubaicoTSFDashboard.Views.ComplianceDetailPage"
+             Title="Compliance Details"
+             BackgroundColor="#F5F5F5">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Frame BackgroundColor="#1A237E" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="{Binding StandardName}" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                    <Label Text="{Binding LegalReference}" 
+                           FontSize="12" 
+                           TextColor="#B3E5FC"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Compliance Score" FontSize="16" FontAttributes="Bold"/>
+                    <Label Text="{Binding CompliancePercentage, StringFormat='{0:F1}%'}" 
+                           FontSize="48" 
+                           FontAttributes="Bold" 
+                           TextColor="#4CAF50"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Detailed Metrics" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0"/>
+
+            <CollectionView ItemsSource="{Binding DetailedItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="White" CornerRadius="10" Padding="15" Margin="0,5" HasShadow="True">
+                            <VerticalStackLayout Spacing="8">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="{Binding Status}" FontSize="20"/>
+                                    <Label Grid.Column="1" 
+                                           Text="{Binding Name}" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                </Grid>
+                                <Label Text="{Binding Description}" 
+                                       FontSize="13" 
+                                       TextColor="#666"/>
+                                <Label Text="{Binding Value, StringFormat='Current Value: {0:F2}'}" 
+                                       FontSize="12" 
+                                       TextColor="#1976D2"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>
