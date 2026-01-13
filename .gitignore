@@ -377,3 +377,18 @@ replay_*.log
 # Temporary files
 *.tmp
 *.temp
+
+# Large runtime files
+runtimecore.dll
+*.dll
+*.exe
+*.so
+*.dylib
+
+# All bin directories (comprehensive)
+**/bin/
+bin/
+
+# All obj directories (comprehensive)  
+**/obj/
+obj/
